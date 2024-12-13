@@ -1,7 +1,7 @@
 import ChatList from "../lib/components/chat-list/chat-list";
 import ChatForm from "../lib/components/request-form/request-form";
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
