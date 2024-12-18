@@ -28,11 +28,16 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased lg:px-6 py-3 flex flex-col items-center`}
       >
-        <header>
-          <h1 className="font-bold text-4xl text-cyan-500">Text Summarizer</h1>
+        <header className="w-full pb-6 border-b shadow-sm my-3">
+          <div className="flex justify-center items-center w-full">
+            <h1 className="font-bold text-4xl text-cyan-500 justify-self-center">
+              Text Summarizer
+            </h1>
+          </div>
         </header>
-        <hr className="w-full shadow-sm my-3" />
-        <main className="flex w-full h-full border rounded-lg">{children}</main>
+        <main className="flex items-center justify-center w-full h-full">
+          {children}
+        </main>
       </body>
     </html>
   );
