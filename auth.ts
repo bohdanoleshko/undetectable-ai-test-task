@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcryptjs from "bcryptjs";
 import { prisma } from "@/app/api/prisma-api/prisma-client";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { z } from "zod";
 import { authConfig } from "./auth.config";
 
@@ -13,7 +12,6 @@ export const {
   signOut,
 } = NextAuth({
   ...authConfig,
-  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -42,7 +40,6 @@ export const {
           return {
             id: String(user.id),
             username: user.username,
-            password: user.password,
           };
         }
 
