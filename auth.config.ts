@@ -1,6 +1,28 @@
-import type { NextAuthConfig } from "next-auth";
+import type { DefaultSession, NextAuthConfig } from "next-auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "./app/api/prisma-api/prisma-client";
+import { User } from "@prisma/client";
+
+interface ExtendedUser extends User {
+  username: string;
+}
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      username: string;
+    } & DefaultSession["user"];
+  }
+
+  interface Token {
+    id: string;
+    username: string;
+  }
+}
 
 export const authConfig = {
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/login",
   },
@@ -31,24 +53,24 @@ export const authConfig = {
 
         return false;
       } else if (isLoggedIn) {
-        return Response.redirect(new URL("/chat/1", nextUrl.href));
+        return Response.redirect(new URL("/chat", nextUrl.href));
       }
 
       return true;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.username = user.username;
+        const extendedUser = user as unknown as ExtendedUser;
+        token.id = extendedUser.id;
+        token.username = extendedUser.username;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user = {
-          id: token.id,
-          username: token.username,
-        };
+        const extendedToken = token as unknown as ExtendedUser;
+        session.user.id = String(extendedToken.id) as string;
+        session.user.username = extendedToken.username;
       }
       return session;
     },

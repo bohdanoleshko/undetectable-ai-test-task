@@ -3,6 +3,7 @@ import { prisma } from "@/app/api/prisma-api/prisma-client";
 import { z } from "zod";
 import { signIn } from "@/auth";
 import bcryptjs from "bcryptjs";
+
 const SignUpSchema = z.object({
   username: z
     .string()
@@ -65,7 +66,7 @@ export const signUp = async (state: SignUpState, formData: FormData) => {
   await signIn("credentials", {
     username,
     password,
-    redirectTo: "/chat/1",
+    redirectTo: "/chat",
   });
 
   return { success: true, user: user };

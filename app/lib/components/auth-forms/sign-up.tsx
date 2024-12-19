@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { signUp, SignUpState } from "../actions/sign-up";
+import { signUp, SignUpState } from "../../actions/form-actions/sign-up";
 
 export default function SignUp() {
   const initialActionState: SignUpState = { errors: {}, message: null };

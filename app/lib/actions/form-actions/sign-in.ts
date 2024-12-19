@@ -19,7 +19,7 @@ export async function authenticate(
     await signIn("credentials", {
       username: formData.get("username"),
       password: formData.get("password"),
-      redirectTo: "/chat/1",
+      redirectTo: "/chat",
     });
   } catch (error) {
     if (error instanceof AuthError) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { signout } from "../actions/sign-out";
+import { signout } from "../../actions/form-actions/sign-out";
 
 export default function SignOut() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
