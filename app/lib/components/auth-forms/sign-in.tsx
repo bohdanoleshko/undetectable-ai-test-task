@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { authenticate } from "../actions/sign-in";
+import { authenticate } from "../../actions/form-actions/sign-in";
 
 export default function SignIn() {
   const [errorMessage, formAction, isPending] = useActionState(
