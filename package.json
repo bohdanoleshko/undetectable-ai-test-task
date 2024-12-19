@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "prepare": "husky install",
+    "postinstall": "prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

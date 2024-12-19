@@ -1,8 +1,8 @@
 model Chat {
-  id        Int      @id @default(autoincrement())
-  chatName String
+  id        Int     @id @default(autoincrement())
+  chatName  String
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
   content   Content @relation(fields: [contentId], references: [id])
   contentId Int     @unique
 }
